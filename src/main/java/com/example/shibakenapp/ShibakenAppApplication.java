@@ -16,5 +16,4 @@ public class ShibakenAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShibakenAppApplication.class, args);
 	}
-
 }
