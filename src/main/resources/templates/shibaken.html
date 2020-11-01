@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>柴犬に癒される</title>
+</head>
+<body>
+
+  <div id="app">
+    <h1>柴犬に癒される</h1>
+    <p>Spring Bootを使用して、APIサーバーを作成することの練習です。</p>
+
+    <button v-on:click="reacquire">再取得</button>
+    <a href="/page/">TOPに戻る</a>
+
+    <div><img v-bind:src="imgUrl"></div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    new Vue({
+      el: '#app',
+      data: {
+        imgUrl: '',
+      },
+
+      mounted() {
+        axios.get('http://localhost:8080/api/shibaken')
+          .then( response => ( this.imgUrl = response.data[0] ) )
+      },
+
+      methods: {
+        reacquire: function() {
+          axios.get('http://localhost:8080/api/shibaken')
+            .then( response => ( this.imgUrl = response.data[0] ) )
+        }
+      }
+
+    })
+    /*]]>*/
+    </script>
+</body>
+</html>

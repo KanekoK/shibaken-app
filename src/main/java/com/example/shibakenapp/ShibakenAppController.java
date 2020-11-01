@@ -13,4 +13,14 @@ public class ShibakenAppController {
         return "index";
     }
 
+    @GetMapping("/shibaken")
+    public String shibaken() {
+        return "shibaken";
+    }
+
+    @GetMapping("/cat")
+    public String cat() {
+        return "cat";
+    }
+
 }

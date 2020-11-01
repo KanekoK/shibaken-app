@@ -30,4 +30,14 @@ public class ShibakenApiController {
 
         return Arrays.asList(strings);
     }
+
+    @GetMapping("/cat")
+    public Object getCat() {
+
+        String url = "https://aws.random.cat/meow";
+
+        Object objects = restTemplate.getForObject(url, Object.class);
+
+        return Arrays.asList(objects);
+    }
 }
