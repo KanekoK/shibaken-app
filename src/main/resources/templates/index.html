@@ -8,12 +8,24 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+  <style>
+    li {
+      list-style: none;
+    }
+    .v-main__wrap {
+      text-align: center;
+    }
+    h1 {
+      padding-top: 30px;
+    }
+  </style>
 </head>
 <body>
 
   <div id="app">
     <v-app>
-      <v-main>
+      <v-content>
         <h1>SpringBoot練習アプリ</h1>
         <p>Spring Bootを使用して、APIサーバーを作成することの練習です。</p>
 
@@ -21,7 +33,7 @@
           <li><a href="/page/shibaken">柴犬に癒される</a></li>
           <li><a href="/page/cat">猫に癒される</a></li>
         </ul>
-      </v-main>
+      </v-content>
     </v-app>
 
   </div>

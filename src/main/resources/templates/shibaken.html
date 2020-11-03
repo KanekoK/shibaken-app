@@ -2,15 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"></head>
   <title>柴犬に癒される</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 
   <style>
+    .v-main__wrap {
+      text-align: center;
+    }
+    h1 {
+      padding-top: 30px;
+    }
+    .top-link, .reacquire {
+      margin: 0 10px;
+    }
     .img-block {
       width: 50%;
+      margin: 40px auto 0;
     }
     .img-block img {
       width: 100%;
@@ -20,21 +30,34 @@
 <body>
 
   <div id="app">
-    <h1>柴犬に癒される</h1>
-    <p>Spring Bootを使用して、APIサーバーを作成することの練習です。</p>
+    <v-app>
+      <v-content>
+        <h1>柴犬に癒される</h1>
+        <p>Spring Bootを使用して、APIサーバーを作成することの練習です。</p>
+        <v-btn
+          color="primary"
+          elevation="2"
+          class="reacquire"
+          v-on:click="reacquire"
+        >
+          再取得
+        </v-btn>
+        <a class="top-link" href="/page/">TOPに戻る</a>
 
-    <button v-on:click="reacquire">再取得</button>
-    <a href="/page/">TOPに戻る</a>
-
-    <div class="img-block">
-      <img v-bind:src="imgUrl">
-    </div>
-
+        <div class="img-block">
+          <img v-show="!loading" v-bind:src="imgUrl">
+          <v-progress-circular
+            v-show="loading"
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </div>
+      </v-content>
+    </v-app>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
@@ -44,17 +67,28 @@
 
       data: {
         imgUrl: '',
+        loading: true
       },
 
       mounted() {
+        this.loading = true;
+
         axios.get('http://localhost:8080/api/shibaken')
-          .then( response => ( this.imgUrl = response.data[0] ) )
+          .then( response => {
+            this.imgUrl = response.data[0];
+            this.loading = false;
+          })
       },
 
       methods: {
         reacquire: function() {
+          this.loading = true;
+
           axios.get('http://localhost:8080/api/shibaken')
-            .then( response => ( this.imgUrl = response.data[0] ) )
+            .then( response => {
+              this.imgUrl = response.data[0];
+              this.loading = false;
+            })
         }
       }
 
